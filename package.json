@@ -1,0 +1,28 @@
+{
+  "name": "cal",
+  "version": "1.0.0",
+  "description": "A beautification for the standard google calendar display",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dr-N0/Cal.git"
+  },
+  "author": "Beckett Jenen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dr-N0/Cal/issues"
+  },
+  "homepage": "https://github.com/Dr-N0/Cal#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "googleapis": "^39.2.0",
+    "moment": "^2.24.0",
+    "nodemon": "^2.0.2"
+  }
+}

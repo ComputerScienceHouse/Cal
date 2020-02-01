@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CSH Calendar</title>
+        <!-- Metta -->
+        <meta charset="utf-8">
+        <meta name="viewport" user-scalable=false content="width=device-width, initial-scale=1"/>
+        <meta name="theme-color" content="#B0197E">
+        <!-- Linking to stylesheets, scriptsheets, and apis -->
+        <link rel="stylesheet" href="https://assets.csh.rit.edu/csh-material-bootstrap/3.3.6/dist/csh-material-bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <a class="navbar-brand" href="/"></a>
+            </div>
+            <div class="row">
+                <button onclick="backward()"> < </button> <span id="month"><%= month %></span> / <span id="year"><%= year %></span> <button onclick="forward()"> > </button>
+            </div>
+            <div class="row justify-content-around">
+                <table style="border: 1px black solid;">
+                <tr>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+                <tr>
+                    
+                </tr>
+                </table>
+            </div>
+        </div>
+        <script>
+            function forward() {
+                fetch('/f-month', {
+                    method: 'GET',
+                    mode:'cors',
+                    dataType: 'json'
+                })
+                .then(r => r.json())
+                .then(r => {
+                    for (var i = 0; i < r.length; i++) {
+                        // console.log(r[i].time);
+                    }
+                })
+                .catch(err => console.log(err))
+            }
+            function backward() {
+                fetch('/b-month', {
+                    method: 'GET',
+                    mode:'cors',
+                    dataType: 'json'
+                })
+                .then(r => r.json())
+                .then(r => {
+                    for (var i = 0; i < r.length; i++) {
+                        // console.log(r[i].time);
+                    }
+                })
+                .catch(err => console.log(err))
+            }
+        </script>
+    </body>
+</html>
