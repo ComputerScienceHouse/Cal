@@ -1,0 +1,51 @@
+/*B0197E, E11C52*/
+
+.popover {
+    z-index: 1010; /* A value higher than 1010 that solves the problem */
+}
+
+table{
+    width: 100%;
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    line-height: 1;
+}
+
+td{
+    min-width: 14.2857142857%;
+    width: 14.2857142857%;
+    font-weight: 500;
+    min-height: 200px;
+}
+
+td:nth-child(even) {
+    color: white;
+    background: #E11C52;
+}
+
+td:nth-child(even) .cal-numbers{
+    /*border-right: 1px white solid;
+    border-bottom: 1px white solid;*/
+    font-weight: 600;
+    padding: 4px;
+}
+
+td:nth-child(odd) .cal-numbers{
+    /*border-right: 1px black solid;
+    border-bottom: 1px black solid;*/
+    font-weight: 600;
+    padding: 4px;
+}
+
+/*td:nth-child(even) hr{
+    border-top: medium double #FFFFFF;
+    color: black;
+}
+
+td:nth-child(odd) hr{
+    border-top: medium double #333;
+    color: white;
+}*/
