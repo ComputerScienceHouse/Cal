@@ -11,72 +11,65 @@ const {google} = require('googleapis');
 // CONFIGURATION FOR MODULES
 app.set('view-engine', 'ejs');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('static'));
 // Initialize using signing secret from environment variables
 const port = process.env.PORT || 3000;
 
 console.log("Start...");
 
-var calendarTotal = [];
 const now = new Date(Date.now());
+var baseDay = (now.getDay());
 var baseMonth = (now.getMonth()+1);
 var baseYear = now.getFullYear();
-var gMonth = baseMonth.toString();
-var gYear = baseYear.toString();
+
+goog.auth((auth) => displayCalendar(auth, baseMonth.toString(), baseYear.toString()));
 
 function displayCalendar(auth, m, y) {
-    console.log(m);
-    console.log(y);
-    var range = getMonthDateRange(y, m)
-    const calendar = google.calendar({version: 'v3', auth});
-    var eve = {
-        day: 1,
-        month: 2,
-        year: 2020,
-        info: "Kill me",
-        time: "2020-01-01T05:00:00.000Z"
-    }
-    for (var i = 0; i < 10; i++) {
-        calendarTotal[i] = eve;
-    }
-    return "";
-    calendar.events.list({
-        calendarId: 'rti648k5hv7j3ae3a3rum8potk@group.calendar.google.com',
-        timeMin: range.start.toISOString(),
-        timeMax: range.end.toISOString(),
-        singleEvents: true,
-        orderBy: 'startTime',
-    }, (err, res) => {
-        if (err) return console.log('The API returned an error: ' + err);
+    return new Promise((resolve, reject) => {
+        const calendarTotal = [];
+        var range = getMonthDateRange(y, m)
+        const calendar = google.calendar({version: 'v3', auth});
+        calendar.events.list({
+            calendarId: 'rti648k5hv7j3ae3a3rum8potk@group.calendar.google.com',
+            timeMin: range.start.toISOString(),
+            timeMax: range.end.toISOString(),
+            singleEvents: true,
+            orderBy: 'startTime',
+            timeZone: 'America/New_York',
+        }, (err, res) => {
+            if (err) {
+                console.log('The API returned an error: ' + err);
+                reject(err);
+            }
             const events = res.data.items;
-        if (events.length) {
-            events.map((event, i) => {
-                const start = event.start.dateTime || event.start.date;
-                const date = isoStringToDate(start).getDate();
-                
-            });
-        } else {
-            console.log('No upcoming events found.');
-        }
+            if (events.length) {
+                events.map((event, i) => {
+                    const start = event.start.dateTime || event.start.date;
+                    const gTime = isoStringToDate(start);
+                    var eve = {
+                        day: gTime.getDate(),
+                        month: (gTime.getMonth()+1),
+                        year: gTime.getFullYear(),
+                        info: event.summary,
+                        time: gTime
+                    }
+                    if (!(i < 25 && eve.day > 25)) {
+                        calendarTotal.push(eve);
+                    }
+                });
+            } else {
+                console.log('No upcoming events found.');
+            }
+
+            resolve(calendarTotal);
+        });
     });
 }
 
 function getMonthDateRange(year, month) {
     var moment = require('moment');
-
-    // month in moment is 0 based, so 9 is actually october, subtract 1 to compensate
-    // array is 'year', 'month', 'day', etc
     var startDate = moment([year, month - 1]);
-
-    // Clone the value before .endOf()
     var endDate = moment(startDate).endOf('month');
-
-    // just for demonstration:
-    console.log(startDate.toDate());
-    console.log(endDate.toDate());
-
-    // make sure to call toDate() for plain JavaScript date type
     return { start: startDate, end: endDate };
 }
 
@@ -86,34 +79,16 @@ function isoStringToDate(s) {
 }
 
 app.get('/', function(req, res) {
-    goog.auth((auth) => displayCalendar(auth, gMonth, gYear));
-    res.render('index.ejs', { month: gMonth, year: gYear });
+    res.render('index.ejs');
 });
 
-app.get('/b-month', function(req, res) {
-    baseMonth--;
-    if (baseMonth == 1) {
-        baseMonth = 12;
-        baseYear--;
-    }
-    console.log(baseMonth);
-    console.log(baseYear);
-    goog.auth((auth) => displayCalendar(auth, gMonth, gYear));
-    // console.log(calendarTotal)
-    res.send(JSON.stringify(calendarTotal));
-});
-
-app.get('/f-month', function(req, res) {
-    baseMonth++;
-    if (baseMonth == 13) {
-        baseMonth = 1;
-        baseYear++;
-    }
-    console.log(baseMonth);
-    console.log(baseYear);
-    goog.auth((auth) => displayCalendar(auth, gMonth, gYear));
-    // console.log(calendarTotal)
-    res.send(JSON.stringify(calendarTotal));
+app.post('/getCal', function(req, res) {
+    return new Promise((resolve) => {
+        goog.auth((auth) => resolve(auth));
+    })
+      .then((auth) => displayCalendar(auth, req.body.mon.toString(), req.body.yea.toString()))
+      .then((calendar) => res.json(calendar))
+      .catch(err => res.json({ success: "false", msg: err.msg }));
 });
 
 app.listen(port, () => {

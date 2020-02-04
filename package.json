@@ -18,11 +18,15 @@
   },
   "homepage": "https://github.com/Dr-N0/Cal#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "googleapis": "^39.2.0",
     "moment": "^2.24.0",
-    "nodemon": "^2.0.2"
+    "mongodb": "^2.2.36",
+    "mongoskin": "^2.1.0",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7"
   }
 }
