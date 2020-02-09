@@ -8,7 +8,6 @@
         <meta name="theme-color" content="#B0197E">
         <!-- Linking to stylesheets, scriptsheets, and apis -->
         <link rel="stylesheet" href="https://assets.csh.rit.edu/csh-material-bootstrap/3.3.6/dist/csh-material-bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
         <!-- Bootstrap CSS library -->
         <link rel="stylesheet" href=
@@ -30,14 +29,13 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
         crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
     <body>
         <div class="container-fluid">
             <!-- <div class="row">
                 <a class="navbar-brand" href="/"></a>
             </div> -->
-            <!-- <a type="button" class="btn btn-lg btn-primary" data-toggle="popover" title="Good vs. Evil Winrate" data-placement="bottom">Who's Winning?</a> -->
-
             <div class="row">
                 <div id="calendar_container">
                     <div class="left"><a href="#l">LEFT BUTTON</a></div>
@@ -109,10 +107,29 @@
             </div>
         </div>
         <script>
-            $(function () {
-                $('[data-toggle="popover"]').popover();
-                $('[data-toggle="popover"]').tooltip({ container: 'body' });
+            $(document).ready(function() {
+                var popOverSettings = {
+                    html: true,
+                    animation: false,
+                    placement: 'top',
+                    container: 'body',
+                    trigger: 'hover',
+                    offset: '70',
+                    selector: "[rel='popover']", //Sepcify the selector here
+                    content: "<div><p id='poppedOver'>Penis</p></div>"
+                }
+
+                $('body').popover(popOverSettings);
+            });
+
+            $("body").on('shown.bs.popover', function () {
+                // console.log($("#poppedOver").text())
             })
+
+            function updateInfo(x){
+                console.log($(x).data("date"));
+            }
+
             function getCalendar(d){
                 const data = { mon: (d.getMonth()+1), yea: d.getFullYear() };
 
@@ -131,6 +148,7 @@
             }
 
             function generateCalendar(d, r) {
+                calData = [];
                 var importPointer = 0;
                 var days = howManyDays(d)+1;
                 var shift = getDayFirstDate(d);
@@ -144,7 +162,7 @@
                         while(i == r[importPointer].day){
                             if (r[importPointer].day != null) {
                                 eventPerDay += "<br>" + "<br>";
-                                eventPerDay += "<a class='eventLine' href='#' onmouseover='ale(this)'>" + r[importPointer].info + "</a>";
+                                eventPerDay += "<a class='eventLine' rel='popover' onmouseover='updateInfo(this)' data-date='"+ i + "'>" + r[importPointer].info + "</a>";
                                 importPointer++;
                             }
                         }
@@ -223,7 +241,6 @@
                 $('.left').click(function() {
                     updateDate(d, 0);
                     $('#data_chooser').html(d.getFullYear() + ' year  '+(d.getMonth()+1) + ' month');
-                    console.log(d.toISOString());
                     getCalendar(d);
 
                     return false;
@@ -232,15 +249,15 @@
                 $('.right').click(function() {
                     updateDate(d, 1);
                     $('#data_chooser').html(d.getFullYear() + ' year  ' + (d.getMonth()+1) + ' month');
-                    console.log(d.toISOString());
                     getCalendar(d);
 
                     return false;
                 });
             });
 
-            function ale(x) {
-                
+            function popover(x) {
+                x.setAttribute('data-toggle', 'popover-hover');
+                x.setAttribute('data-title', 'asdflkjsajkfdasjkldjlks');
             }
         </script>
     </body>

@@ -1,9 +1,5 @@
 /*B0197E, E11C52*/
 
-.popover {
-    z-index: 1010; /* A value higher than 1010 that solves the problem */
-}
-
 table{
     width: 100%;
     table-layout: fixed;
@@ -49,3 +45,10 @@ td:nth-child(odd) hr{
     border-top: medium double #333;
     color: white;
 }*/
+
+
+/*Pop-over*/
+.popover .arrow{
+    display: none;
+}
+

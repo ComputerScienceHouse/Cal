@@ -47,11 +47,10 @@ function displayCalendar(auth, m, y) {
                     const start = event.start.dateTime || event.start.date;
                     const gTime = isoStringToDate(start);
                     var eve = {
+                        time: gTime,
                         day: gTime.getDate(),
-                        month: (gTime.getMonth()+1),
-                        year: gTime.getFullYear(),
-                        info: event.summary,
-                        time: gTime
+                        info: event.summary
+                        // SEND MORE INFORMATION TO DISPLAY ON POPOVERS (DESCRIPTION, LOCATION, LINKS)
                     }
                     if (!(i < 25 && eve.day > 25)) {
                         calendarTotal.push(eve);
