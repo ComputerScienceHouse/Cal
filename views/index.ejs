@@ -29,18 +29,18 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
         crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/03ebd399b9.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
     <body>
         <div class="container-fluid">
-            <!-- <div class="row">
-                <a class="navbar-brand" href="/"></a>
-            </div> -->
+            <div class="row justify-content-between nav-bar">
+                <button class="left"><i class="fa fa-arrow-left"></i></button>
+                <div id="data_chooser"></div>
+                <button class="right"><i class="fa fa-arrow-right"></i></button>
+            </div>
             <div class="row">
                 <div id="calendar_container">
-                    <div class="left"><a href="#l">LEFT BUTTON</a></div>
-                    <div class="right"><a href="#r">RIGHT BUTTON</a></div>
-                    <div id="data_chooser"></div>
                     <div id="calendar_display">
                         <table class="table table-striped table-bordered">
                             <thead>
@@ -109,25 +109,29 @@
         <script>
             $(document).ready(function() {
                 var popOverSettings = {
-                    html: true,
                     animation: false,
+                    html: true,
                     placement: 'top',
                     container: 'body',
                     trigger: 'hover',
-                    offset: '70',
+                    offset: '200',
                     selector: "[rel='popover']", //Sepcify the selector here
-                    content: "<div><p id='poppedOver'>Penis</p></div>"
+                    content: "<div id='poppedOver'><p>Error</p></div>"
                 }
 
                 $('body').popover(popOverSettings);
             });
 
-            $("body").on('shown.bs.popover', function () {
-                // console.log($("#poppedOver").text())
-            })
-
             function updateInfo(x){
-                console.log($(x).data("date"));
+                $("body").on('shown.bs.popover', function () {
+                    var obj = $(x);
+                    var tableDay = obj.closest('table').find('th').eq(obj[0].offsetParent.cellIndex)[0].innerHTML;
+                    $("#poppedOver").html(
+                        '<p><b>Day: </b>' + tableDay + " (" + obj.data("d") + ')</p>'
+                        + '<p><b>Title: </b>' + obj.text() + '</p>'
+                        + '<p><b>Location: </b>' + obj.data("loc") + '</p>'
+                    );
+                })
             }
 
             function getCalendar(d){
@@ -162,7 +166,7 @@
                         while(i == r[importPointer].day){
                             if (r[importPointer].day != null) {
                                 eventPerDay += "<br>" + "<br>";
-                                eventPerDay += "<a class='eventLine' rel='popover' onmouseover='updateInfo(this)' data-date='"+ i + "'>" + r[importPointer].info + "</a>";
+                                eventPerDay += "<a class='eventLine' rel='popover' onmouseover='updateInfo(this)' data-d='"+ i + "' href='"+ r[importPointer].link + "' data-loc='"+ r[importPointer].loc + "'>" + r[importPointer].info + "</a>";
                                 importPointer++;
                             }
                         }
@@ -171,7 +175,6 @@
                     $('#calendar_display .r'+posi_row).children('.col'+posi_col).html(element);
                 }
             }
-
             function clear(){
                 $('#calendar_display tbody td').each(function(){
                     $(this).html('');
@@ -235,12 +238,12 @@
 
             $(function(){
                 var d = new Date();
-                $('#data_chooser').html(d.getFullYear() + ' year  ' + (d.getMonth()+1) + ' month');
+                $('#data_chooser').html((d.getMonth()+1) + '/' + d.getFullYear());
                 getCalendar(d);
 
                 $('.left').click(function() {
                     updateDate(d, 0);
-                    $('#data_chooser').html(d.getFullYear() + ' year  '+(d.getMonth()+1) + ' month');
+                    $('#data_chooser').html((d.getMonth()+1) + '/' + d.getFullYear());
                     getCalendar(d);
 
                     return false;
@@ -248,17 +251,12 @@
 
                 $('.right').click(function() {
                     updateDate(d, 1);
-                    $('#data_chooser').html(d.getFullYear() + ' year  ' + (d.getMonth()+1) + ' month');
+                    $('#data_chooser').html((d.getMonth()+1) + '/' + d.getFullYear());
                     getCalendar(d);
 
                     return false;
                 });
             });
-
-            function popover(x) {
-                x.setAttribute('data-toggle', 'popover-hover');
-                x.setAttribute('data-title', 'asdflkjsajkfdasjkldjlks');
-            }
         </script>
     </body>
 </html>
