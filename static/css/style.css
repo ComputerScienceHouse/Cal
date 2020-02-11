@@ -46,8 +46,14 @@ td:nth-child(odd) .eventLine{
     color: black;
 }
 
-.eventLine, .eventLine:focus, .eventLine:hover, .eventLine:active{
+a{
     text-decoration: none;
+}
+
+.copy-link, .copy-link:focus, .copy-link:hover, .copy-link:active{
+    text-decoration: none;
+    color: white;
+    display: inline-block;
 }
 
 .nav-bar{
@@ -68,7 +74,7 @@ td:nth-child(odd) .eventLine{
 }
 
 .month-changer{
-    width: 90%;
+    width: 70%;
     text-align: center;
     display: inline-block;
 }
