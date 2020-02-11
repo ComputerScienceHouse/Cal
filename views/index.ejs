@@ -34,10 +34,15 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row justify-content-between nav-bar">
-                <button class="left"><i class="fa fa-arrow-left"></i></button>
-                <div id="data_chooser"></div>
-                <button class="right"><i class="fa fa-arrow-right"></i></button>
+            <div class="row justify-content-center nav-bar">
+                <a href="https://www.csh.rit.edu/">
+                    <img class="navbar-logo" src="/img/logo.png" width="30" height="30">
+                </a>
+                <div class="month-changer justify-content-center">
+                    <button class="left"><i class="fa fa-arrow-left"></i></button>
+                    <div id="data_chooser"></div>
+                    <button class="right"><i class="fa fa-arrow-right"></i></button>
+                </div>
             </div>
             <div class="row">
                 <div id="calendar_container">
@@ -125,11 +130,11 @@
             function updateInfo(x){
                 $("body").on('shown.bs.popover', function () {
                     var obj = $(x);
-                    var tableDay = obj.closest('table').find('th').eq(obj[0].offsetParent.cellIndex)[0].innerHTML;
                     $("#poppedOver").html(
-                        '<p><b>Day: </b>' + tableDay + " (" + obj.data("d") + ')</p>'
+                        '<p><b>Day: </b>' + obj.data("d") + '</p>'
                         + '<p><b>Title: </b>' + obj.text() + '</p>'
                         + '<p><b>Location: </b>' + obj.data("loc") + '</p>'
+                        + '<p><b>Description: </b>' + obj.data("des") + '</p>'
                     );
                 })
             }
@@ -166,7 +171,7 @@
                         while(i == r[importPointer].day){
                             if (r[importPointer].day != null) {
                                 eventPerDay += "<br>" + "<br>";
-                                eventPerDay += "<a class='eventLine' rel='popover' onmouseover='updateInfo(this)' data-d='"+ i + "' href='"+ r[importPointer].link + "' data-loc='"+ r[importPointer].loc + "'>" + r[importPointer].info + "</a>";
+                                eventPerDay += "<a class='eventLine' rel='popover' onmouseover='updateInfo(this)' data-d='"+ i + "' href='"+ r[importPointer].link + "' data-loc='"+ r[importPointer].loc + "' data-des='"+ r[importPointer].des + "'>" + r[importPointer].info + "</a>";
                                 importPointer++;
                             }
                         }
