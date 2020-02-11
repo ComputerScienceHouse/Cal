@@ -55,8 +55,22 @@ td:nth-child(odd) .eventLine{
     color: white;
     font-weight: 800px;
     font-size: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px;
+}
+
+.navbar-logo{
+    border-radius: 10%;
+    display: inline-block;
+}
+
+.navbar-logo-title{
+    margin-left: 2%;
+}
+
+.month-changer{
+    width: 90%;
+    text-align: center;
+    display: inline-block;
 }
 
 .left, .right{
@@ -70,6 +84,7 @@ td:nth-child(odd) .eventLine{
     border-bottom: 1px solid white;
     font-size: 15px;
     outline: none;
+    display: inline-block;
 }
 
 .left:focus, .right:focus{
@@ -81,14 +96,16 @@ td:nth-child(odd) .eventLine{
 }
 
 .left{
-    float: left;
     margin-left: 0.5%;
     margin-right: 2%;
 }
 
 .right{
-    float: right;
     margin-left: 2%;
+}
+
+#data_chooser{
+    display: inline-block;
 }
 
 .popover .arrow{
@@ -98,7 +115,8 @@ td:nth-child(odd) .eventLine{
 .popover{
     border-radius: 10px;
     background-color: #E11C52;
-    border: 2px solid black;
+    border: 4px solid black;
+    /*box-shadow: 0 0 0 3px #000, 0 0 0 6px #E11C52, 0 0 0 9px #000;*/
 }
 
 #poppedOver{

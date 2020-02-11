@@ -46,16 +46,29 @@ function displayCalendar(auth, m, y) {
                 events.map((event, i) => {
                     const start = event.start.dateTime || event.start.date;
                     const gTime = isoStringToDate(start);
-                    var gLoc = "";
+                    var gLoc = "N/A";
+                    var gDes = "N/A";
                     if(event.location !== undefined){
-                        gLoc = event.location
+                        if(event.location.length > 500 ){
+                            gLoc = "N/A"
+                        }else{
+                            gLoc = event.location
+                        }
+                    }
+                    if(event.description !== undefined){
+                        if(event.description.length > 300 ){
+                            gDes = "N/A"
+                        }else{
+                            gDes = event.description
+                        }
                     }
                     var eve = {
                         time: gTime,
                         day: gTime.getDate(),
                         info: event.summary,
                         link: event.htmlLink,
-                        loc: gLoc
+                        loc: gLoc,
+                        des: gDes
                     }
                     if (!(i < 25 && eve.day > 25)) {
                         calendarTotal.push(eve);
