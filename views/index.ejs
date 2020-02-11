@@ -8,7 +8,6 @@
         <meta name="theme-color" content="#B0197E">
         <!-- Linking to stylesheets, scriptsheets, and apis -->
         <link rel="stylesheet" href="https://assets.csh.rit.edu/csh-material-bootstrap/3.3.6/dist/csh-material-bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
         <!-- Bootstrap CSS library -->
         <link rel="stylesheet" href=
@@ -30,19 +29,18 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
         crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/03ebd399b9.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
     <body>
         <div class="container-fluid">
-            <!-- <div class="row">
-                <a class="navbar-brand" href="/"></a>
-            </div> -->
-            <!-- <a type="button" class="btn btn-lg btn-primary" data-toggle="popover" title="Good vs. Evil Winrate" data-placement="bottom">Who's Winning?</a> -->
-
+            <div class="row justify-content-between nav-bar">
+                <button class="left"><i class="fa fa-arrow-left"></i></button>
+                <div id="data_chooser"></div>
+                <button class="right"><i class="fa fa-arrow-right"></i></button>
+            </div>
             <div class="row">
                 <div id="calendar_container">
-                    <div class="left"><a href="#l">LEFT BUTTON</a></div>
-                    <div class="right"><a href="#r">RIGHT BUTTON</a></div>
-                    <div id="data_chooser"></div>
                     <div id="calendar_display">
                         <table class="table table-striped table-bordered">
                             <thead>
@@ -109,10 +107,33 @@
             </div>
         </div>
         <script>
-            $(function () {
-                $('[data-toggle="popover"]').popover();
-                $('[data-toggle="popover"]').tooltip({ container: 'body' });
-            })
+            $(document).ready(function() {
+                var popOverSettings = {
+                    animation: false,
+                    html: true,
+                    placement: 'top',
+                    container: 'body',
+                    trigger: 'hover',
+                    offset: '200',
+                    selector: "[rel='popover']", //Sepcify the selector here
+                    content: "<div id='poppedOver'><p>Error</p></div>"
+                }
+
+                $('body').popover(popOverSettings);
+            });
+
+            function updateInfo(x){
+                $("body").on('shown.bs.popover', function () {
+                    var obj = $(x);
+                    var tableDay = obj.closest('table').find('th').eq(obj[0].offsetParent.cellIndex)[0].innerHTML;
+                    $("#poppedOver").html(
+                        '<p><b>Day: </b>' + tableDay + " (" + obj.data("d") + ')</p>'
+                        + '<p><b>Title: </b>' + obj.text() + '</p>'
+                        + '<p><b>Location: </b>' + obj.data("loc") + '</p>'
+                    );
+                })
+            }
+
             function getCalendar(d){
                 const data = { mon: (d.getMonth()+1), yea: d.getFullYear() };
 
@@ -131,6 +152,7 @@
             }
 
             function generateCalendar(d, r) {
+                calData = [];
                 var importPointer = 0;
                 var days = howManyDays(d)+1;
                 var shift = getDayFirstDate(d);
@@ -144,7 +166,7 @@
                         while(i == r[importPointer].day){
                             if (r[importPointer].day != null) {
                                 eventPerDay += "<br>" + "<br>";
-                                eventPerDay += "<a class='eventLine' href='#' onmouseover='ale(this)'>" + r[importPointer].info + "</a>";
+                                eventPerDay += "<a class='eventLine' rel='popover' onmouseover='updateInfo(this)' data-d='"+ i + "' href='"+ r[importPointer].link + "' data-loc='"+ r[importPointer].loc + "'>" + r[importPointer].info + "</a>";
                                 importPointer++;
                             }
                         }
@@ -153,7 +175,6 @@
                     $('#calendar_display .r'+posi_row).children('.col'+posi_col).html(element);
                 }
             }
-
             function clear(){
                 $('#calendar_display tbody td').each(function(){
                     $(this).html('');
@@ -217,13 +238,12 @@
 
             $(function(){
                 var d = new Date();
-                $('#data_chooser').html(d.getFullYear() + ' year  ' + (d.getMonth()+1) + ' month');
+                $('#data_chooser').html((d.getMonth()+1) + '/' + d.getFullYear());
                 getCalendar(d);
 
                 $('.left').click(function() {
                     updateDate(d, 0);
-                    $('#data_chooser').html(d.getFullYear() + ' year  '+(d.getMonth()+1) + ' month');
-                    console.log(d.toISOString());
+                    $('#data_chooser').html((d.getMonth()+1) + '/' + d.getFullYear());
                     getCalendar(d);
 
                     return false;
@@ -231,17 +251,12 @@
 
                 $('.right').click(function() {
                     updateDate(d, 1);
-                    $('#data_chooser').html(d.getFullYear() + ' year  ' + (d.getMonth()+1) + ' month');
-                    console.log(d.toISOString());
+                    $('#data_chooser').html((d.getMonth()+1) + '/' + d.getFullYear());
                     getCalendar(d);
 
                     return false;
                 });
             });
-
-            function ale(x) {
-                
-            }
         </script>
     </body>
 </html>

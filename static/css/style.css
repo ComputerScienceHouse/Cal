@@ -1,7 +1,8 @@
 /*B0197E, E11C52*/
+/*4FE681, 1EE3AD*/
 
-.popover {
-    z-index: 1010; /* A value higher than 1010 that solves the problem */
+html{
+    background-color: #E11C52;
 }
 
 table{
@@ -27,25 +28,82 @@ td:nth-child(even) {
 }
 
 td:nth-child(even) .cal-numbers{
-    /*border-right: 1px white solid;
-    border-bottom: 1px white solid;*/
     font-weight: 600;
     padding: 4px;
 }
 
 td:nth-child(odd) .cal-numbers{
-    /*border-right: 1px black solid;
-    border-bottom: 1px black solid;*/
     font-weight: 600;
     padding: 4px;
 }
 
-/*td:nth-child(even) hr{
-    border-top: medium double #FFFFFF;
+td:nth-child(even) .eventLine{
+    color: white;
+    background: #E11C52;
+}
+
+td:nth-child(odd) .eventLine{
     color: black;
 }
 
-td:nth-child(odd) hr{
-    border-top: medium double #333;
+.eventLine, .eventLine:focus, .eventLine:hover, .eventLine:active{
+    text-decoration: none;
+}
+
+.nav-bar{
+    background-color: #E11C52;
     color: white;
-}*/
+    font-weight: 800px;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.left, .right{
+    background-color: #E11C52;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    border-top: 1px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 1px solid white;
+    font-size: 15px;
+    outline: none;
+}
+
+.left:focus, .right:focus{
+    outline: none;
+    border-top: 1px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 1px solid white;
+}
+
+.left{
+    float: left;
+    margin-left: 0.5%;
+    margin-right: 2%;
+}
+
+.right{
+    float: right;
+    margin-left: 2%;
+}
+
+.popover .arrow{
+    display: none;
+}
+
+.popover{
+    border-radius: 10px;
+    background-color: #E11C52;
+    border: 2px solid black;
+}
+
+#poppedOver{
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+}
+

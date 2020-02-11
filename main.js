@@ -46,12 +46,16 @@ function displayCalendar(auth, m, y) {
                 events.map((event, i) => {
                     const start = event.start.dateTime || event.start.date;
                     const gTime = isoStringToDate(start);
+                    var gLoc = "";
+                    if(event.location !== undefined){
+                        gLoc = event.location
+                    }
                     var eve = {
+                        time: gTime,
                         day: gTime.getDate(),
-                        month: (gTime.getMonth()+1),
-                        year: gTime.getFullYear(),
                         info: event.summary,
-                        time: gTime
+                        link: event.htmlLink,
+                        loc: gLoc
                     }
                     if (!(i < 25 && eve.day > 25)) {
                         calendarTotal.push(eve);
@@ -92,5 +96,5 @@ app.post('/getCal', function(req, res) {
 });
 
 app.listen(port, () => {
-    console.log(`Main on port = 3000`);
+    console.log(`Main on port = 4000`);
 });
