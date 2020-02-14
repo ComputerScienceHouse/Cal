@@ -1,15 +1,16 @@
 // Author: Beckett Jenen
 
 const fs = require('fs');
+const path = require('path');
 const readline = require('readline');
 const {google} = require('googleapis');
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-const TOKEN_PATH = process.join(process.cwd(), "secrets", "token.json");
+const TOKEN_PATH = path.join(process.cwd(), "secrets", "token.json");
 
 module.exports = {
 	auth: function(callback){
 		// Load client secrets from a local file.
-		fs.readFile(process.join(process.cwd(), "secrets", "credentials.json"), (err, content) => {
+		fs.readFile(path.join(process.cwd(), "secrets", "credentials.json"), (err, content) => {
 		if (err) return console.log('Error loading client secret file:', err);
 			// Authorize a client with credentials, then call the Google Calendar API.
 			authorize(JSON.parse(content), callback);
