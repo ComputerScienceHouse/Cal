@@ -121,12 +121,13 @@
                     placement: 'top',
                     container: 'body',
                     trigger: 'hover',
-                    offset: '200',
+                    offset: '180',
                     selector: "[rel='popover']", //Sepcify the selector here
                     content: "<div id='poppedOver'><p>Error</p></div>"
                 }
 
                 $('body').popover(popOverSettings);
+                $().tooltip({container: 'body'})
             });
 
             function updateInfo(x){

@@ -41,7 +41,7 @@ td:nth-child(odd) .cal-numbers{
 
 td:nth-child(even) .eventLine{
     color: white;
-    background: #E11C52;
+    background-color: transparent;
 }
 
 td:nth-child(odd) .eventLine{
@@ -132,4 +132,16 @@ a{
     font-size: 10px;
     font-weight: 600;
 }
+
+/*MEDIA TAGS*/
+
+/*@media only screen and (max-width: 991px) {
+    td:nth-child(even) .eventLine{
+        overflow: hidden;
+    }
+    td:nth-child(odd) .eventLine{
+        overflow: hidden;
+    }
+}
+*/
 

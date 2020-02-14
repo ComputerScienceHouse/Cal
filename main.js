@@ -15,7 +15,7 @@ app.set('view-engine', 'ejs');
 app.use(bodyParser.json());
 app.use(express.static('static'));
 // Initialize using signing secret from environment variables
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 console.log("Start...");
 
@@ -111,5 +111,5 @@ app.post('/getCal', function(req, res) {
 });
 
 app.listen(port, () => {
-    console.log(`Main on port = 4000`);
+    console.log(`Main on port = 8080`);
 });
