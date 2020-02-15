@@ -5,7 +5,7 @@ $red-csh: #E11C52;
 $purple-csh: #B0197E;
 
 html {
-  background-color: $red-csh;
+    background-color: $purple-csh;
 }
 
 a {
@@ -13,23 +13,32 @@ a {
 }
 
 table {
-  width: 100%;
-  table-layout: fixed;
-  overflow: hidden;
+    width: 100%;
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+    table {
+        white-space: nowrap
+    }
+    td {
+        overflow-x: auto;
+    }
 }
 
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-  line-height: 1;
+    line-height: 1;
 }
 
 td {
     min-width: 14.2857142857%;
     width: 14.2857142857%;
     font-weight: 500;
-    min-height: 200px;
+    height: 200px;
     &:nth-child(even) {
         color: white;
-        background: $red-csh;
+        background: $purple-csh;
         .cal-numbers {
             font-weight: 600;
             padding: 4px;
@@ -57,7 +66,7 @@ td {
 }
 
 .nav-bar {
-    background-color: $red-csh;
+    background-color: $purple-csh;
     color: white;
     font-weight: 800px;
     font-size: 20px;
@@ -89,7 +98,7 @@ td {
 }
 
 .left, .right {
-    background-color: $red-csh;
+    background-color: $purple-csh;
     color: white;
     padding: 5px 10px 5px 10px;
     border-radius: 10px;
@@ -115,9 +124,9 @@ td {
 
 .popover {
     border-radius: 10px;
-    background-color: $red-csh;
+    background-color: $purple-csh;
     border: 4px solid black;
-    /*box-shadow: 0 0 0 3px #000, 0 0 0 6px $red-csh, 0 0 0 9px #000;*/
+    /*box-shadow: 0 0 0 3px #000, 0 0 0 6px $purple-csh, 0 0 0 9px #000;*/
     .arrow {
         display: none;
     }
