@@ -15,7 +15,7 @@ app.set('view-engine', 'ejs');
 app.use(bodyParser.json());
 app.use(express.static('static'));
 // Initialize using signing secret from environment variables
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4000;
 
 console.log("Start...");
 

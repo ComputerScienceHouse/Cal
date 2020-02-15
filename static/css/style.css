@@ -1,147 +1,125 @@
 /*Author: Beckett Jenen*/
-
-/*B0197E, E11C52*/
-/*4FE681, 1EE3AD*/
-
-html{
-    background-color: #E11C52;
+html {
+  background-color: #E11C52;
 }
 
-table{
-    width: 100%;
-    table-layout: fixed;
-    overflow: hidden;
+a {
+  text-decoration: none;
 }
 
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-    line-height: 1;
+table {
+  width: 100%;
+  table-layout: fixed;
+  overflow: hidden;
 }
 
-td{
-    min-width: 14.2857142857%;
-    width: 14.2857142857%;
-    font-weight: 500;
-    min-height: 200px;
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+  line-height: 1;
 }
 
+td {
+  min-width: 14.2857142857%;
+  width: 14.2857142857%;
+  font-weight: 500;
+  min-height: 200px;
+}
 td:nth-child(even) {
-    color: white;
-    background: #E11C52;
+  color: white;
+  background: #E11C52;
+}
+td:nth-child(even) .cal-numbers {
+  font-weight: 600;
+  padding: 4px;
+}
+td:nth-child(even) .eventLine {
+  color: white;
+  background-color: transparent;
+}
+td:nth-child(odd) .cal-numbers {
+  font-weight: 600;
+  padding: 4px;
+}
+td:nth-child(odd) .eventLine {
+  color: black;
 }
 
-td:nth-child(even) .cal-numbers{
-    font-weight: 600;
-    padding: 4px;
+.copy-link, .copy-link:focus, .copy-link:hover, .copy-link:active {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
 }
 
-td:nth-child(odd) .cal-numbers{
-    font-weight: 600;
-    padding: 4px;
+.nav-bar {
+  background-color: #E11C52;
+  color: white;
+  font-weight: 800px;
+  font-size: 20px;
+  padding: 5px;
 }
 
-td:nth-child(even) .eventLine{
-    color: white;
-    background-color: transparent;
+.navbar-logo {
+  border-radius: 10%;
+  display: inline-block;
 }
 
-td:nth-child(odd) .eventLine{
-    color: black;
+.navbar-logo-title {
+  margin-left: 2%;
 }
 
-a{
-    text-decoration: none;
+.month-changer {
+  width: 70%;
+  text-align: center;
+  display: inline-block;
 }
 
-.copy-link, .copy-link:focus, .copy-link:hover, .copy-link:active{
-    text-decoration: none;
-    color: white;
-    display: inline-block;
+.left {
+  margin-left: 0.5%;
+  margin-right: 2%;
 }
 
-.nav-bar{
-    background-color: #E11C52;
-    color: white;
-    font-weight: 800px;
-    font-size: 20px;
-    padding: 5px;
+.right {
+  margin-left: 2%;
 }
 
-.navbar-logo{
-    border-radius: 10%;
-    display: inline-block;
+.left, .right {
+  background-color: #E11C52;
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+  border-top: 1px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  border-bottom: 1px solid white;
+  font-size: 15px;
+  outline: none;
+  display: inline-block;
+}
+.left:focus, .right:focus {
+  outline: none;
+  border-top: 1px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  border-bottom: 1px solid white;
 }
 
-.navbar-logo-title{
-    margin-left: 2%;
+#data_chooser {
+  display: inline-block;
 }
 
-.month-changer{
-    width: 70%;
-    text-align: center;
-    display: inline-block;
+.popover {
+  border-radius: 10px;
+  background-color: #E11C52;
+  border: 4px solid black;
+  /*box-shadow: 0 0 0 3px #000, 0 0 0 6px $red-csh, 0 0 0 9px #000;*/
+}
+.popover .arrow {
+  display: none;
 }
 
-.left, .right{
-    background-color: #E11C52;
-    color: white;
-    padding: 5px 10px 5px 10px;
-    border-radius: 10px;
-    border-top: 1px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid white;
-    border-bottom: 1px solid white;
-    font-size: 15px;
-    outline: none;
-    display: inline-block;
+#poppedOver {
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
 }
 
-.left:focus, .right:focus{
-    outline: none;
-    border-top: 1px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid white;
-    border-bottom: 1px solid white;
-}
-
-.left{
-    margin-left: 0.5%;
-    margin-right: 2%;
-}
-
-.right{
-    margin-left: 2%;
-}
-
-#data_chooser{
-    display: inline-block;
-}
-
-.popover .arrow{
-    display: none;
-}
-
-.popover{
-    border-radius: 10px;
-    background-color: #E11C52;
-    border: 4px solid black;
-    /*box-shadow: 0 0 0 3px #000, 0 0 0 6px #E11C52, 0 0 0 9px #000;*/
-}
-
-#poppedOver{
-    color: white;
-    font-size: 10px;
-    font-weight: 600;
-}
-
-/*MEDIA TAGS*/
-
-/*@media only screen and (max-width: 991px) {
-    td:nth-child(even) .eventLine{
-        overflow: hidden;
-    }
-    td:nth-child(odd) .eventLine{
-        overflow: hidden;
-    }
-}
-*/
-
+/*# sourceMappingURL=style.css.map */
