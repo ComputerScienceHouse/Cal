@@ -1,0 +1,131 @@
+/*Author: Beckett Jenen*/
+
+$font-stack: Helvetica, sans-serif;
+$red-csh: #E11C52;
+$purple-csh: #B0197E;
+
+html {
+  background-color: $red-csh;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+  line-height: 1;
+}
+
+td {
+    min-width: 14.2857142857%;
+    width: 14.2857142857%;
+    font-weight: 500;
+    min-height: 200px;
+    &:nth-child(even) {
+        color: white;
+        background: $red-csh;
+        .cal-numbers {
+            font-weight: 600;
+            padding: 4px;
+        }
+        .eventLine {
+            color: white;
+            background-color: transparent;
+        }
+    }
+    &:nth-child(odd) {
+        .cal-numbers {
+            font-weight: 600;
+            padding: 4px;
+        }
+        .eventLine {
+            color: black;
+        }
+    }
+}
+
+.copy-link, .copy-link:focus, .copy-link:hover, .copy-link:active {
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+}
+
+.nav-bar {
+    background-color: $red-csh;
+    color: white;
+    font-weight: 800px;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.navbar-logo {
+    border-radius: 10%;
+    display: inline-block;
+}
+
+.navbar-logo-title {
+    margin-left: 2%;
+}
+
+.month-changer {
+    width: 70%;
+    text-align: center;
+    display: inline-block;
+}
+
+.left {
+    margin-left: 0.5%;
+    margin-right: 2%;
+}
+
+.right {
+    margin-left: 2%;
+}
+
+.left, .right {
+    background-color: $red-csh;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    border-top: 1px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 1px solid white;
+    font-size: 15px;
+    outline: none;
+    display: inline-block;
+    &:focus {
+        outline: none;
+        border-top: 1px solid white;
+        border-left: 2px solid white;
+        border-right: 2px solid white;
+        border-bottom: 1px solid white;
+    }
+}
+
+#data_chooser {
+    display: inline-block;
+}
+
+.popover {
+    border-radius: 10px;
+    background-color: $red-csh;
+    border: 4px solid black;
+    /*box-shadow: 0 0 0 3px #000, 0 0 0 6px $red-csh, 0 0 0 9px #000;*/
+    .arrow {
+        display: none;
+    }
+}
+
+#poppedOver {
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+}
+
