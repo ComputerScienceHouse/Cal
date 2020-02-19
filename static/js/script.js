@@ -26,6 +26,12 @@ function updateInfo(x){
     })
 }
 
+function parseSC(st){
+    var stP = st.replace(/'/g, "&#39;").replace(/,/g, "&#44;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/`/g, "&#96;");
+
+    return stP;
+}
+
 function getCalendar(d){
     const data = { mon: (d.getMonth()+1), yea: d.getFullYear() };
 
@@ -39,6 +45,7 @@ function getCalendar(d){
     .then(r => r.json())
     .then(r => {
         generateCalendar(d, r);
+        $(".popover").popover('hide');
     })
     .catch(err => console.log(err));
 }
@@ -58,7 +65,11 @@ function generateCalendar(d, r) {
             while(i == r[importPointer].day){
                 if (r[importPointer].day != null) {
                     eventPerDay += "<br>" + "<br>";
-                    eventPerDay += "<a class='eventLine' target='_blank' rel='popover' onmouseover='updateInfo(this)' data-d='"+ i + "' href='"+ r[importPointer].link + "' data-loc='"+ r[importPointer].loc + "' data-des='"+ r[importPointer].des + "'>" + r[importPointer].info + "</a>";
+                    eventPerDay += "<a class='eventLine' target='_blank' rel='popover' onmouseover='updateInfo(this)' data-d='" + i 
+                    + "' href='" + r[importPointer].link
+                    + "' data-loc='" + r[importPointer].loc
+                    + "' data-des='"+ parseSC(r[importPointer].des)
+                    + "'>" + parseSC(r[importPointer].info) + "</a>";
                     importPointer++;
                 }
             }
