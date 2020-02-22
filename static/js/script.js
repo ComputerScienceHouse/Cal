@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    var win = $(window);
+    var checkOnce = false;
     var popOverSettings = {
         animation: false,
         html: true,
@@ -12,13 +14,47 @@ $(document).ready(function() {
 
     $('body').popover(popOverSettings);
     $().tooltip({container: 'body'})
+
+    win.resize(bigSmol);
+
+    function bigSmol(){
+        if (win.width() < 660) {
+            $(".smallTable").show();
+            $(".bigTable").hide();
+            if (!($(".smallTable").firstChild) && checkOnce == false) {
+                displayEvents();
+                checkOnce = true;
+            }
+        }else if(win.width() >= 660) {
+            $(".smallTable").hide();
+            $(".bigTable").show();
+        }
+    }
 });
 
 function updateInfo(x){
+    var objectRow = x.closest('td').className;
+    var objectRowP = "";
+    if (objectRow == "col0") {
+        objectRowP = "Sunday";
+    }else if (objectRow == "col1") {
+        objectRowP = "Monday";
+    }else if (objectRow == "col2") {
+        objectRowP = "Tuesday";
+    }else if (objectRow == "col3") {
+        objectRowP = "Wednesday";
+    }else if (objectRow == "col4") {
+        objectRowP = "Thursday";
+    }else if (objectRow == "col5") {
+        objectRowP = "Friday";
+    }else if (objectRow == "col6") {
+        objectRowP = "Saturday";
+    }
+
     $("body").on('shown.bs.popover', function () {
         var obj = $(x);
         $("#poppedOver").html(
-            '<p><b>Day: </b>' + obj.data("d") + '</p>'
+            '<p><b>Day: </b>' + objectRowP + ' (' + obj.data("d") + ')</p>'
             + '<p><b>Title: </b>' + obj.text() + '</p>'
             + '<p><b>Location: </b>' + obj.data("loc") + '</p>'
             + '<p><b>Description: </b>' + obj.data("des") + '</p>'
@@ -44,8 +80,10 @@ function getCalendar(d){
     })
     .then(r => r.json())
     .then(r => {
+        resetEvents();
         generateCalendar(d, r);
         $(".popover").popover('hide');
+        displayEvents();
     })
     .catch(err => console.log(err));
 }
@@ -159,4 +197,43 @@ $(function(){
 
         return false;
     });
+
 });
+
+function displayEvents(){
+    var win = $(window);
+    if(win.width() < 660 && !($(".smallTable").firstChild)) {
+        var allEvents = jQuery('.eventLine').clone();
+        allEvents.appendTo('.smallTable');
+        $('.smallTable > .eventLine').each(function () {
+            var obj = $(this);
+            var currentDay = obj.data("d");
+            var currentHTML = obj.html();
+            obj.attr("href", "#");
+            obj.attr("target", "");
+            obj.html(currentHTML + "<br>");
+        });
+    }
+    if (win.width() < 660) {
+        $(".smallTable").show();
+        $(".bigTable").hide();
+    }else if(win.width() >= 660) {
+        $(".smallTable").hide();
+        $(".bigTable").show();
+    }
+}
+
+function resetEvents(){
+    var win = $(window);
+
+    if(win.width() < 660) {
+        $('.smallTable > .eventLine').each(function () {
+            var obj = $(this);
+            obj.remove();
+        });
+    }
+}
+
+
+
+

@@ -18,15 +18,6 @@ table {
     overflow: hidden;
 }
 
-@media only screen and (max-width: 768px) {
-    table {
-        white-space: nowrap
-    }
-    td {
-        overflow-x: auto;
-    }
-}
-
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
     line-height: 1;
 }
@@ -83,7 +74,7 @@ td {
 }
 
 .month-changer {
-    width: 70%;
+    width: 53%;
     text-align: center;
     display: inline-block;
 }
@@ -136,5 +127,22 @@ td {
     color: white;
     font-size: 10px;
     font-weight: 600;
+}
+
+.smallTable {
+    background-color: $purple-csh;
+    
+}
+
+.smallTable .eventLine {
+    font-weight: 500;
+    font-size: 24px;
+    &:nth-child(even) {
+        color: white;
+        background: $purple-csh;
+    }
+    &:nth-child(odd) {
+        color: black;
+    }
 }
 
