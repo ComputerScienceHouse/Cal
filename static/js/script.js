@@ -123,7 +123,7 @@ function generateCalendar(d, r) {
             }
         }catch(err){}
         var element = "<span class='cal-numbers'>" + i + "</span>" + eventPerDay;
-        $('#calendar_display .r'+posi_row).children('.col'+posi_col).html(element);
+        $('#calendar_display .r' + posi_row).children('.col' + posi_col).html(element);
     }
 }
 function clear(){
@@ -231,7 +231,3 @@ function resetEvents(){
         obj.remove();
     });
 }
-
-
-
-
