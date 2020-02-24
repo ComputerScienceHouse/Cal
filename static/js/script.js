@@ -220,7 +220,7 @@ function displayEvents(){
             var currentHTML = obj.html();
             obj.attr("href", "#");
             obj.attr("target", "");
-            obj.html(currentHTML + "<br>");
+            obj.html(obj.data("d") + " | " + currentHTML + "<br>");
         });
     }
 }
