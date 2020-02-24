@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    var win = $(window);
+    var checkOnce = false;
     var popOverSettings = {
         animation: false,
         html: true,
@@ -12,13 +14,57 @@ $(document).ready(function() {
 
     $('body').popover(popOverSettings);
     $().tooltip({container: 'body'})
+
+    bigSmol();
+
+    win.resize(bigSmol);
+
+    function bigSmol(){
+        if (win.width() < 660) {
+            $(".smallTable").show();
+            $(".bigTable").hide();
+            $("body").css("background-color", "#B0197E");
+            if (checkOnce == false) {
+                resetEvents();
+                displayEvents();
+                checkOnce = true;
+            }
+        }else if(win.width() >= 660) {
+            $(".smallTable").hide();
+            $(".bigTable").show();
+            $("body").css("background-color", "#fff");
+        }
+    }
 });
 
 function updateInfo(x){
+    try{
+        var objectRow = x.closest('td').className;
+        var objectRowP = "";
+        var dayName = " ~ ";
+        if (objectRow == "col0") {
+            objectRowP = dayName + "Sunday";
+        }else if (objectRow == "col1") {
+            objectRowP = dayName + "Monday";
+        }else if (objectRow == "col2") {
+            objectRowP = dayName + "Tuesday";
+        }else if (objectRow == "col3") {
+            objectRowP = dayName + "Wednesday";
+        }else if (objectRow == "col4") {
+            objectRowP = dayName + "Thursday";
+        }else if (objectRow == "col5") {
+            objectRowP = dayName + "Friday";
+        }else if (objectRow == "col6") {
+            objectRowP = dayName + "Saturday";
+        }
+    }catch{
+        objectRowP = "";
+    }
+
     $("body").on('shown.bs.popover', function () {
         var obj = $(x);
         $("#poppedOver").html(
-            '<p><b>Day: </b>' + obj.data("d") + '</p>'
+            '<p><b>Day: </b>' + obj.data("d") + objectRowP + '</p>'
             + '<p><b>Title: </b>' + obj.text() + '</p>'
             + '<p><b>Location: </b>' + obj.data("loc") + '</p>'
             + '<p><b>Description: </b>' + obj.data("des") + '</p>'
@@ -44,8 +90,10 @@ function getCalendar(d){
     })
     .then(r => r.json())
     .then(r => {
+        resetEvents();
         generateCalendar(d, r);
         $(".popover").popover('hide');
+        displayEvents();
     })
     .catch(err => console.log(err));
 }
@@ -69,13 +117,13 @@ function generateCalendar(d, r) {
                     + "' href='" + r[importPointer].link
                     + "' data-loc='" + r[importPointer].loc
                     + "' data-des='"+ parseSC(r[importPointer].des)
-                    + "'>" + parseSC(r[importPointer].info) + "</a>";
+                    + "'>" + r[importPointer].time + " | " + parseSC(r[importPointer].info) + "</a>";
                     importPointer++;
                 }
             }
         }catch(err){}
         var element = "<span class='cal-numbers'>" + i + "</span>" + eventPerDay;
-        $('#calendar_display .r'+posi_row).children('.col'+posi_col).html(element);
+        $('#calendar_display .r' + posi_row).children('.col' + posi_col).html(element);
     }
 }
 function clear(){
@@ -159,4 +207,27 @@ $(function(){
 
         return false;
     });
+
 });
+
+function displayEvents(){
+    if(!($(".smallTable").firstChild)) {
+        var allEvents = jQuery('.eventLine').clone();
+        allEvents.appendTo('.smallTable');
+        $('.smallTable > .eventLine').each(function () {
+            var obj = $(this);
+            var currentDay = obj.data("d");
+            var currentHTML = obj.html();
+            obj.attr("href", "#");
+            obj.attr("target", "");
+            obj.html(obj.data("d") + " | " + currentHTML + "<br>");
+        });
+    }
+}
+
+function resetEvents(){
+    $('.smallTable > .eventLine').each(function () {
+        var obj = $(this);
+        obj.remove();
+    });
+}

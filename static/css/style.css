@@ -13,15 +13,6 @@ table {
   overflow: hidden;
 }
 
-@media only screen and (max-width: 768px) {
-  table {
-    white-space: nowrap;
-  }
-
-  td {
-    overflow-x: auto;
-  }
-}
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
   line-height: 1;
 }
@@ -76,7 +67,7 @@ td:nth-child(odd) .eventLine {
 }
 
 .month-changer {
-  width: 70%;
+  width: 53%;
   text-align: center;
   display: inline-block;
 }
@@ -119,7 +110,6 @@ td:nth-child(odd) .eventLine {
   border-radius: 10px;
   background-color: #B0197E;
   border: 4px solid black;
-  /*box-shadow: 0 0 0 3px #000, 0 0 0 6px $purple-csh, 0 0 0 9px #000;*/
 }
 .popover .arrow {
   display: none;
@@ -129,6 +119,25 @@ td:nth-child(odd) .eventLine {
   color: white;
   font-size: 10px;
   font-weight: 600;
+}
+
+.smallTable {
+  background-color: #B0197E;
+  padding: 10px;
+}
+
+.smallTable .eventLine {
+  font-weight: 500;
+  font-size: 24px;
+  color: white;
+  background: #B0197E;
+  /*    &:nth-child(even) {
+          color: white;
+          background: $purple-csh;
+      }*/
+  /*    &:nth-child(odd) {
+          color: black;
+      }*/
 }
 
 /*# sourceMappingURL=style.css.map */
