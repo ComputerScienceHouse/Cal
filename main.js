@@ -50,6 +50,7 @@ function displayCalendar(auth, m, y) {
                     const gTime = isoStringToDate(start);
                     var gLoc = "N/A";
                     var gDes = "N/A";
+                    var gMin = gTime.getMinutes();
                     if(event.location !== undefined){
                         if(event.location.length > 500 ){
                             gLoc = "N/A"
@@ -64,8 +65,11 @@ function displayCalendar(auth, m, y) {
                             gDes = event.description
                         }
                     }
+                    if(gMin == "0"){
+                        gMin = "00";
+                    }
                     var eve = {
-                        time: gTime,
+                        time: (gTime.getHours() + ":" + gMin),
                         day: gTime.getDate(),
                         info: event.summary,
                         link: event.htmlLink,
