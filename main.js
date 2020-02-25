@@ -69,7 +69,7 @@ function displayCalendar(auth, m, y) {
                         gMin = "00";
                     }
                     var eve = {
-                        time: ((gTime.getHours()+5) + ":" + gMin),
+                        time: ((alterTimeZone(gTime.getHours())) + ":" + gMin),
                         day: gTime.getDate(),
                         info: event.summary,
                         link: event.htmlLink,
@@ -99,6 +99,15 @@ function getMonthDateRange(year, month) {
 function isoStringToDate(s) {
     var b = s.split(/\D/);
     return new Date(Date.UTC(b[0], --b[1], b[2], b[3]||0, b[4]||0, b[5]||0, b[6]||0));
+}
+
+function alterTimeZone(t){
+    var nDate = t+5;
+    if(24 < nDate){
+        return nDate - 24;
+    }else{
+        return nDate;
+    }
 }
 
 app.get('/', function(req, res) {
