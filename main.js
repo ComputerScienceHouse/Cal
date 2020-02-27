@@ -69,7 +69,7 @@ function displayCalendar(auth, m, y) {
                         gMin = "00";
                     }
                     var eve = {
-                        time: ((gTime.getHours()) + ":" + gMin),
+                        time: (alterTimeZone(gTime.getHours()) + ":" + gMin),
                         day: gTime.getDate(),
                         info: event.summary,
                         link: event.htmlLink,
