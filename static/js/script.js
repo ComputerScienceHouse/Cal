@@ -23,7 +23,7 @@ $(document).ready(function() {
         if (win.width() < 660) {
             $(".smallTable").show();
             $(".bigTable").hide();
-            $("body").css("background-color", "#B0197E");
+            // $("body").css("background-color", "#B0197E");
             if (checkOnce == false) {
                 resetEvents();
                 displayEvents();
@@ -32,7 +32,7 @@ $(document).ready(function() {
         }else if(win.width() >= 660) {
             $(".smallTable").hide();
             $(".bigTable").show();
-            $("body").css("background-color", "#fff");
+            // $("body").css("background-color", "#fff");
         }
     }
 });
@@ -220,7 +220,7 @@ function displayEvents(){
             var currentHTML = obj.html();
             obj.attr("href", "#");
             obj.attr("target", "");
-            obj.html(obj.data("d") + " | " + currentHTML + "<br>");
+            obj.html(obj.data("d") + " | " + currentHTML + "<hr>");
         });
     }
 }

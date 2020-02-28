@@ -129,15 +129,16 @@ td {
 }
 
 .smallTable {
-    background-color: $purple-csh;
+    background-color: white;
     padding: 10px;
 }
 
 .smallTable .eventLine {
     font-weight: 500;
     font-size: 24px;
-    color: white;
-    background: $purple-csh;
+    color: $purple-csh;
+    background: white;
+    border: 2px solid white;
 
 /*    &:nth-child(even) {
         color: white;
