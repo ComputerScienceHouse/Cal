@@ -218,7 +218,7 @@ function displayEvents(){
             var obj = $(this);
             var currentDay = obj.data("d");
             var currentHTML = obj.html();
-            obj.attr("href", "#");
+            obj.attr("href", "javascript:void(0)");
             obj.attr("target", "");
             obj.html(obj.data("d") + " | " + currentHTML + "<hr>");
         });
