@@ -3,23 +3,40 @@
 $font-stack: Helvetica, sans-serif;
 $red-csh: #E11C52;
 $purple-csh: #B0197E;
+$purple-csh-half: rgba(176, 25, 126, 0.5);
 
 html {
-    background-color: $purple-csh;
+    background-color: white;
 }
+
+body {
+    padding-top: 55px;
+}
+
+body, html{height:100%}
 
 a {
     text-decoration: none;
+}
+
+.c_cont{
+    height: 100%!important;
 }
 
 table {
     width: 100%;
     table-layout: fixed;
     overflow: hidden;
+    height: 100%;
+}
+
+.table {
+    margin: 0;
 }
 
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
     line-height: 1;
+    font-size: 1.1rem;
 }
 
 td {
@@ -27,6 +44,7 @@ td {
     width: 14.2857142857%;
     font-weight: 500;
     height: 200px;
+    max-height: auto;
     &:nth-child(even) {
         color: white;
         background: $purple-csh;
@@ -34,7 +52,7 @@ td {
             font-weight: 600;
             padding: 4px;
         }
-        .eventLine {
+        .event-line {
             color: white;
             background-color: transparent;
         }
@@ -44,7 +62,7 @@ td {
             font-weight: 600;
             padding: 4px;
         }
-        .eventLine {
+        .event-line {
             color: black;
         }
     }
@@ -61,7 +79,14 @@ td {
     color: white;
     font-weight: 800px;
     font-size: 20px;
-    padding: 5px;
+    padding: 8px 0 8px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    border: 2px solid white;
+    min-width: 228px;
 }
 
 .navbar-logo {
@@ -74,9 +99,10 @@ td {
 }
 
 .month-changer {
-    width: 53%;
+    width: 170px;
     text-align: center;
     display: inline-block;
+    margin: 0 10px 0 10px;
 }
 
 .left {
@@ -128,24 +154,47 @@ td {
     font-weight: 600;
 }
 
-.smallTable {
+.small-table {
     background-color: white;
     padding: 10px;
+    padding-top: 40px;
 }
 
-.smallTable .eventLine {
+.small-table .event-line {
     font-weight: 500;
     font-size: 24px;
     color: $purple-csh;
     background: white;
     border: 2px solid white;
+}
 
-/*    &:nth-child(even) {
-        color: white;
-        background: $purple-csh;
-    }*/
-/*    &:nth-child(odd) {
-        color: black;
-    }*/
+.go-to-button {
+    background-color: $purple-csh-half;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    border-top: 1px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 1px solid white;
+    font-size: 15px;
+    outline: none;
+    display: inline-block;
+    position: fixed;
+    left: 4%;
+    top: 60px;
+    &:focus {
+        outline: none;
+        border-top: 1px solid white;
+        border-left: 2px solid white;
+        border-right: 2px solid white;
+        border-bottom: 1px solid white;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    .copy-link, .copy-link:focus, .copy-link:hover, .copy-link:active {
+        display: none;
+    }
 }
 
