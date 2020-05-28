@@ -125,4 +125,5 @@ app.post('/getCal', function(req, res) {
 
 app.listen(port, () => {
     console.log(`Main on port = 8080`);
+    console.log(`Testing on port = 4000`);
 });
