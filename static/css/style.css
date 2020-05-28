@@ -1,20 +1,38 @@
 /*Author: Beckett Jenen*/
 html {
-  background-color: #B0197E;
+  background-color: white;
+}
+
+body {
+  padding-top: 55px;
+}
+
+body, html {
+  height: 100%;
 }
 
 a {
   text-decoration: none;
 }
 
+.c_cont {
+  height: 100% !important;
+}
+
 table {
   width: 100%;
   table-layout: fixed;
   overflow: hidden;
+  height: 100%;
+}
+
+.table {
+  margin: 0;
 }
 
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
   line-height: 1;
+  font-size: 1.1rem;
 }
 
 td {
@@ -22,6 +40,7 @@ td {
   width: 14.2857142857%;
   font-weight: 500;
   height: 200px;
+  max-height: auto;
 }
 td:nth-child(even) {
   color: white;
@@ -31,7 +50,7 @@ td:nth-child(even) .cal-numbers {
   font-weight: 600;
   padding: 4px;
 }
-td:nth-child(even) .eventLine {
+td:nth-child(even) .event-line {
   color: white;
   background-color: transparent;
 }
@@ -39,7 +58,7 @@ td:nth-child(odd) .cal-numbers {
   font-weight: 600;
   padding: 4px;
 }
-td:nth-child(odd) .eventLine {
+td:nth-child(odd) .event-line {
   color: black;
 }
 
@@ -54,7 +73,14 @@ td:nth-child(odd) .eventLine {
   color: white;
   font-weight: 800px;
   font-size: 20px;
-  padding: 5px;
+  padding: 8px 0 8px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  border: 2px solid white;
+  min-width: 228px;
 }
 
 .navbar-logo {
@@ -67,9 +93,10 @@ td:nth-child(odd) .eventLine {
 }
 
 .month-changer {
-  width: 53%;
+  width: 170px;
   text-align: center;
   display: inline-block;
+  margin: 0 10px 0 10px;
 }
 
 .left {
@@ -121,24 +148,48 @@ td:nth-child(odd) .eventLine {
   font-weight: 600;
 }
 
-.smallTable {
+.small-table {
   background-color: white;
   padding: 10px;
+  padding-top: 40px;
 }
 
-.smallTable .eventLine {
+.small-table .event-line {
   font-weight: 500;
   font-size: 24px;
   color: #B0197E;
   background: white;
   border: 2px solid white;
-  /*    &:nth-child(even) {
-          color: white;
-          background: $purple-csh;
-      }*/
-  /*    &:nth-child(odd) {
-          color: black;
-      }*/
+}
+
+.go-to-button {
+  background-color: rgba(176, 25, 126, 0.5);
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+  border-top: 1px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  border-bottom: 1px solid white;
+  font-size: 15px;
+  outline: none;
+  display: inline-block;
+  position: fixed;
+  left: 4%;
+  top: 60px;
+}
+.go-to-button:focus {
+  outline: none;
+  border-top: 1px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  border-bottom: 1px solid white;
+}
+
+@media only screen and (max-width: 390px) {
+  .copy-link, .copy-link:focus, .copy-link:hover, .copy-link:active {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

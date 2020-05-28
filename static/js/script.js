@@ -21,18 +21,28 @@ $(document).ready(function() {
 
     function bigSmol(){
         if (win.width() < 660) {
-            $(".smallTable").show();
+            $(".main").removeClass("c_cont");
+            $(".container-fluid").removeClass("c_cont");
+            $("#calendar_container").removeClass("c_cont");
+            $("#calendar_display").removeClass("c_cont");
+            $(".small-table").show();
             $(".bigTable").hide();
-            // $("body").css("background-color", "#B0197E");
+            $(".popover").popover('hide');
             if (checkOnce == false) {
                 resetEvents();
                 displayEvents();
                 checkOnce = true;
             }
         }else if(win.width() >= 660) {
-            $(".smallTable").hide();
+            $(".main").addClass("c_cont");
+            $(".container-fluid").addClass("c_cont");
+            $("#calendar_container").addClass("c_cont");
+            $("#calendar_display").addClass("c_cont");
+            $(".small-table").hide();
             $(".bigTable").show();
-            // $("body").css("background-color", "#fff");
+            $(".popover").popover('hide');
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
     }
 });
@@ -113,8 +123,8 @@ function generateCalendar(d, r) {
             while(i == r[importPointer].day){
                 if (r[importPointer].day != null) {
                     eventPerDay += "<br>" + "<br>";
-                    eventPerDay += "<a class='eventLine' target='_blank' rel='popover' onmouseover='updateInfo(this)' data-d='" + i 
-                    + "' href='" + r[importPointer].link
+                    eventPerDay += "<a class='event-line' id='#" + i + "' target='_blank' rel='popover' onmouseover='updateInfo(this)' data-d='" + i 
+                    + "' data-link='" + r[importPointer].link
                     + "' data-loc='" + r[importPointer].loc
                     + "' data-des='"+ parseSC(r[importPointer].des)
                     + "'>" + r[importPointer].time + " | " + parseSC(r[importPointer].info) + "</a>";
@@ -126,10 +136,29 @@ function generateCalendar(d, r) {
         $('#calendar_display .r' + posi_row).children('.col' + posi_col).html(element);
     }
 }
+
 function clear(){
     $('#calendar_display tbody td').each(function(){
         $(this).html('');
     })
+}
+
+function goToCurrentDay(){
+    var check = new Date();
+    var day = check.getDate();
+    var id = "#" + day.toString();
+    if (document.getElementById(id) == null) {
+        var closestDay = day;
+        while(document.getElementById("#" + closestDay.toString()) == null){
+            closestDay--;
+        }
+        id = "#" + closestDay.toString();
+    }
+    var yOffset = -100; 
+    var element = document.getElementById(id);
+    var y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({top: y, behavior: 'smooth'});
 }
 
 function getDayFirstDate(d) {
@@ -196,7 +225,6 @@ $(function(){
         updateDate(d, 0);
         $('#data_chooser').html((d.getMonth()+1) + '/' + d.getFullYear());
         getCalendar(d);
-
         return false;
     });
 
@@ -204,21 +232,20 @@ $(function(){
         updateDate(d, 1);
         $('#data_chooser').html((d.getMonth()+1) + '/' + d.getFullYear());
         getCalendar(d);
-
         return false;
     });
 
 });
 
 function displayEvents(){
-    if(!($(".smallTable").firstChild)) {
-        var allEvents = jQuery('.eventLine').clone();
-        allEvents.appendTo('.smallTable');
-        $('.smallTable > .eventLine').each(function () {
+    if(!($(".small-table").firstChild)) {
+        var allEvents = jQuery('.event-line').clone();
+        allEvents.appendTo('.small-table');
+        $('.small-table > .event-line').each(function () {
             var obj = $(this);
             var currentDay = obj.data("d");
             var currentHTML = obj.html();
-            obj.attr("href", "#");
+            obj.attr("href", "javascript:void(0)");
             obj.attr("target", "");
             obj.html(obj.data("d") + " | " + currentHTML + "<hr>");
         });
@@ -226,7 +253,7 @@ function displayEvents(){
 }
 
 function resetEvents(){
-    $('.smallTable > .eventLine').each(function () {
+    $('.small-table > .event-line').each(function () {
         var obj = $(this);
         obj.remove();
     });
