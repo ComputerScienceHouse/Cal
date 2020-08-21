@@ -1,4 +1,4 @@
-// Author: Beckett Jenen
+// Author: Beckett Jenen.
 
 if (process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
