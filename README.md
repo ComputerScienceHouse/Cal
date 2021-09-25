@@ -7,8 +7,7 @@ The public facing website for [Rochester Institute of Technology](https://rit.ed
 This site is written using [NodeJS](https://nodejs.org/en/), [EJS](https://ejs.co/) to render the templates, and uses Sass and JavaScript ES6.
 
 ## Local Development
-
-#### Prerequisites:
+### Prerequisites:
 [NodeJS](https://nodejs.org/en/download/)
 
 #### Instructions
